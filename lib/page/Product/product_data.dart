@@ -135,23 +135,6 @@ class _ProductBuilderState extends State<ProductBuilder> {
             Column(
               children: [
                 IconButton(
-                    onPressed: () async {
-                      SharedPreferences pref =
-                          await SharedPreferences.getInstance();
-                      setState(
-                        () async {
-                          await APIRepository().removeProduct(
-                              product.id,
-                              pref.getString('accountID').toString(),
-                              pref.getString('token').toString());
-                        },
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    )),
-                IconButton(
                   onPressed: () {
                     setState(
                       () {

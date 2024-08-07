@@ -140,8 +140,8 @@ class _DetailcartState extends State<Detailcart> {
           children: [
             if (product.img.isNotEmpty && product.img != 'Null')
               Container(
-                height: 100,
-                width: 100,
+                height: 80,
+                width: 80,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
@@ -179,18 +179,28 @@ class _DetailcartState extends State<Detailcart> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(product.name,
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
                   Text(
-                    'Màu: ${product.des}',
-                    maxLines: 2,
+                    product.name,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    'Mô tả: ${product.des}',
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 11),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(0),
+                    padding: EdgeInsets.zero,
                     child: Row(
                       children: [
-                        const Text('Số lượng: '),
+                        const Text(
+                          'Số lượng: ',
+                          style: TextStyle(fontSize: 12),
+                        ),
                         IconButton(
                           onPressed: () {
                             setState(() {
@@ -224,18 +234,39 @@ class _DetailcartState extends State<Detailcart> {
                             size: 16,
                           ),
                         ),
+                        const SizedBox(
+                          width: 24,
+                        ),
                       ],
                     ),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
-                  Text('Đơn giá: ${product.price.toString()}đ'),
+                  Text(
+                    'Đơn giá: ${product.price.toString()}đ',
+                    style: const TextStyle(fontSize: 12),
+                  ),
                   const SizedBox(
                     height: 5,
                   ),
-                  Text('Tổng giá: ${product.price * product.count}đ')
+                  Text(
+                    'Tổng giá: ${product.price * product.count}đ',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 12),
+                  )
                 ],
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                _databaseHelper.deleteProduct(product);
+                setState(() {});
+              },
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.red,
+                size: 24,
               ),
             ),
           ],
